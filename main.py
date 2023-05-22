@@ -11,8 +11,8 @@ wb_conf = f'''
 PrivateKey = {server_private_key}
 Address = 10.0.0.1/24
 ListenPort = 51850
-PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ens4 -j MASQUERADE
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ens0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ens0 -j MASQUERADE
 '''
 
 ip_ch = 2
@@ -44,7 +44,5 @@ AllowedIPs = 10.0.0.{ip_ch}/32
 
     key_for_client = open(f"/root/setup-wireguard/client/{client}.conf", "w").write(peer_to_client)
     ip_ch += 1
-    key_for_client.close()
 
 server_conf = open('/etc/wireguard/wg0.conf', "w").write(wb_conf)
-server_conf.close()
