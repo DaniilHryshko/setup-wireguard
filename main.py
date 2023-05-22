@@ -44,21 +44,7 @@ AllowedIPs = 10.0.0.{ip_ch}/32
 
     key_for_client = open(f"/root/setup-wireguard/client/{client}.conf", "w").write(peer_to_client)
     ip_ch += 1
+    key_for_client.close()
 
 server_conf = open('/etc/wireguard/wg0.conf', "w").write(wb_conf)
-
-    peer_to_client = f'''
-[Interface]
-PrivateKey = {client_private_key}
-Address = 10.0.0.2/32
-DNS = 8.8.8.8
-
-[Peer]
-PublicKey = {server_public_key}
-Endpoint = {external_ip}:51850
-AllowedIPs = 0.0.0.0/0
-PersistentKeepalive = 15
-'''
-    key_for_client = open(f"/root/auto-sutup-wireguard/client/{client}.conf", "w").write(peer_to_client)
-
-server_conf = open('/etc/wireguard/wg0.conf', "w").write(wb_conf)
+server_conf.close()
