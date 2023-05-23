@@ -15,7 +15,7 @@ sudo apt-get -y install python3-pip
 sudo pip3 install -r requirements.txt
 python3 main.py
 
-echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+echo "net.ipv4.ip_forward=1" > /etc/sysctl.conf
 echo "net.ipv4.tcp_timestamps=1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_window_scaling=0" >> /etc/sysctl.conf
 sysctl -p
@@ -24,6 +24,9 @@ iptables -A INPUT -p icmp --icmp-type echo-request -j REJECT
 
 systemctl enable wg-quick@wg0.service
 systemctl start wg-quick@wg0.service
-systemctl status wg-quick@wg0.service
 
+cat /root/setup-wireguard/client/Alpha.conf
+cat /root/setup-wireguard/client/Beta.conf
+
+systemctl status wg-quick@wg0.service
 reboot
