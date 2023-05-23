@@ -34,6 +34,7 @@ AllowedIPs = 10.0.0.{ip_ch}/32
     PrivateKey = {client_private_key}
     Address = 10.0.0.{ip_ch}/32
     DNS = 8.8.8.8
+    MTU = 1500
 
     [Peer]
     PublicKey = {server_public_key}
